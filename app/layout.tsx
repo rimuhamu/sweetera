@@ -21,7 +21,10 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: 'Sweetera Patisserie & Bakery',
   description:
-    'Handcrafted French pastries, artisan breads, and exquisite cakes made with premium ingredients and traditional techniques.',
+    'Handcrafted French pastries, artisan breads, and exquisite cakes made with premium ingredients.',
+  icons: {
+    icon: '/images/logo.jpg',
+  },
 }
 
 export const viewport: Viewport = {
