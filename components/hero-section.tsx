@@ -19,8 +19,7 @@ export function HeroSection() {
           Handcrafted Sweetness, Artfully Created
         </h1>
         <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-primary-foreground/90 drop-shadow-sm md:text-base">
-          Premium pastries, artisan breads, and exquisite cakes crafted with
-          traditional French techniques and the finest ingredients.
+          Premium pastries, artisan breads, and exquisite cakes crafted with the finest ingredients.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link

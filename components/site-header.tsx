@@ -11,8 +11,7 @@ import { useCart } from '@/lib/cart-context'
 const navLinks = [
   { href: '/', label: 'HOME' },
   { href: '/products', label: 'PRODUCTS' },
-  { href: '/about', label: 'ABOUT' },
-  { href: '/contact', label: 'CONTACT' },
+  { href: '/#socials', label: 'SOCIALS' },
 ]
 
 export function SiteHeader() {
@@ -66,9 +65,6 @@ export function SiteHeader() {
 
         {/* Right icons */}
         <div className="flex items-center gap-4">
-          <button aria-label="Search" className="text-foreground/70 transition-colors hover:text-foreground">
-            <Search className="size-4" />
-          </button>
           <button
             aria-label="Shopping cart"
             className="relative text-foreground/70 transition-colors hover:text-foreground"

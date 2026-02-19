@@ -7,34 +7,6 @@ export function Footer() {
         <p className="text-xs tracking-[0.15em] text-muted-foreground">
           &copy; {new Date().getFullYear()} SWEETERA PATISSERIE
         </p>
-        <nav aria-label="Footer navigation">
-          <ul className="flex items-center gap-6">
-            <li>
-              <Link
-                href="/sustainability"
-                className="text-xs tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground"
-              >
-                SUSTAINABILITY
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/shipping"
-                className="text-xs tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground"
-              >
-                SHIPPING
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/terms"
-                className="text-xs tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground"
-              >
-                TERMS
-              </Link>
-            </li>
-          </ul>
-        </nav>
       </div>
     </footer>
   )

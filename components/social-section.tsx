@@ -32,7 +32,7 @@ const socialPosts = [
 
 export function SocialSection() {
   return (
-    <section className="py-20 md:py-28 border-t border-border">
+    <section id="socials" className="py-20 md:py-28 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           <div className="max-w-md text-center md:text-left">
