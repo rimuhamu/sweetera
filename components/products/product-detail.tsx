@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, Search, ShoppingBag } from 'lucide-react'
+import { Header } from '@/components/header'
 import {
   Accordion,
   AccordionContent,
@@ -14,7 +14,6 @@ import { QuantitySelector } from './quantity-selector'
 import { useCart } from '@/lib/cart-context'
 import type { Product } from '@/lib/products'
 import { ProductCard } from './product-card'
-
 interface ProductDetailProps {
   product: Product
   relatedProducts: Product[]
@@ -23,7 +22,7 @@ interface ProductDetailProps {
 export function ProductDetail({ product, relatedProducts }: ProductDetailProps) {
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
-  const { addItem, totalItems, setIsCartOpen } = useCart()
+  const { addItem } = useCart()
 
   function handleAddToCart() {
     addItem(
@@ -42,46 +41,7 @@ export function ProductDetail({ product, relatedProducts }: ProductDetailProps) 
 
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Top bar */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
-          <Link
-            href="/products"
-            className="flex items-center gap-2 text-xs tracking-[0.15em] text-foreground transition-colors hover:text-muted-foreground"
-          >
-            <ArrowLeft className="size-4" />
-            BACK TO SHOP
-          </Link>
-
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2">
-            <Image
-              src="/images/logo.jpg"
-              alt="Sweetera Logo"
-              width={36}
-              height={36}
-              className="rounded-sm"
-            />
-          </Link>
-
-          <div className="flex items-center gap-4">
-            <button aria-label="Search" className="text-foreground/70 transition-colors hover:text-foreground">
-              <Search className="size-4" />
-            </button>
-            <button
-              aria-label="Shopping cart"
-              className="relative text-foreground/70 transition-colors hover:text-foreground"
-              onClick={() => setIsCartOpen(true)}
-            >
-              <ShoppingBag className="size-4" />
-              {totalItems > 0 && (
-                <span className="absolute -right-1.5 -top-1.5 flex size-4 items-center justify-center rounded-full bg-accent text-[10px] font-medium text-foreground">
-                  {totalItems}
-                </span>
-              )}
-            </button>
-          </div>
-        </div>
-      </header>
+      <Header backHref="/products" backLabel="BACK TO SHOP" />
 
       {/* Main content */}
       <main className="flex-1">

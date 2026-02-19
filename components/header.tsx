@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Search, ShoppingBag, Menu, X } from 'lucide-react'
+import { ShoppingBag, Menu, X, ArrowLeft } from 'lucide-react'
 import { useState } from 'react'
 import { useCart } from '@/lib/cart-context'
 
@@ -13,55 +13,77 @@ const navLinks = [
   { href: '/#socials', label: 'SOCIALS' },
 ]
 
-export function Header() {
+interface HeaderProps {
+  /** When provided, replaces the hamburger menu with a back arrow link */
+  backHref?: string
+  backLabel?: string
+}
+
+export function Header({ backHref, backLabel = 'BACK' }: HeaderProps) {
   const pathname = usePathname()
   const { totalItems, setIsCartOpen } = useCart()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-50" style={{ backgroundColor: '#4A2C1A' }}>
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden text-[#F5E6D3] hover:text-white transition-colors"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+        {/* Left: back link or mobile hamburger */}
+        {backHref ? (
+          <Link
+            href={backHref}
+            className="flex items-center gap-2 text-xs tracking-[0.15em] text-[#D4A574] transition-colors hover:text-white"
+          >
+            <ArrowLeft className="size-4" />
+            {backLabel}
+          </Link>
+        ) : (
+          <>
+            <button
+              className="md:hidden text-[#F5E6D3] hover:text-white transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+
+            {/* Desktop nav */}
+            <nav className="hidden flex-1 md:block" aria-label="Main navigation">
+              <ul className="flex items-center gap-8">
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className={`text-xs tracking-[0.2em] transition-colors ${
+                        pathname === link.href
+                          ? 'text-white font-medium'
+                          : 'text-[#D4A574] hover:text-white'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </>
+        )}
+
+        {/* Center logo (always visible) */}
+        <Link
+          href="/"
+          className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex-shrink-0"
+          aria-label="Sweetera home"
         >
-          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-
-        {/* Desktop nav - left side empty for centering */}
-        <nav className="hidden flex-1 md:block" aria-label="Main navigation">
-          <ul className="flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`text-xs tracking-[0.2em] transition-colors ${
-                    pathname === link.href
-                      ? 'text-white font-medium'
-                      : 'text-[#D4A574] hover:text-white'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Center logo */}
-        <Link href="/" className="flex-shrink-0" aria-label="Sweetera home">
           <Image
             src="/images/logo.jpg"
             alt="Sweetera Logo"
-            width={36}
-            height={36}
+            width={40}
+            height={40}
             className="rounded-sm"
           />
         </Link>
 
-        {/* Right side icons */}
+        {/* Right: cart icon */}
         <div className="flex flex-1 items-center justify-end gap-4">
           <button
             aria-label={`Shopping cart with ${totalItems} items`}
@@ -78,9 +100,12 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <nav className="border-t border-[#6B3D22] px-6 py-4 md:hidden" aria-label="Mobile navigation">
+      {/* Mobile dropdown menu (only when no backHref) */}
+      {!backHref && mobileMenuOpen && (
+        <nav
+          className="border-t border-[#6B3D22] px-6 py-4 md:hidden"
+          aria-label="Mobile navigation"
+        >
           <ul className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <li key={link.href}>
