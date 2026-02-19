@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCart } from '@/lib/cart-context'
@@ -171,20 +171,33 @@ export function CheckoutContent() {
     setSubmitted(true)
   }
 
+  useEffect(() => {
+    if (submitted) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [submitted])
+
   if (submitted) {
     return (
-      <div className="mx-auto flex max-w-xl flex-col items-center justify-center px-6 py-32 text-center">
-        <h1 className="font-serif text-3xl text-foreground">Thank You</h1>
-        <p className="mt-4 leading-relaxed text-muted-foreground">
-          Your order has been placed. A receipt has been sent to our team via
-          WhatsApp — we will confirm your order shortly.
-        </p>
-        <Link
-          href="/products"
-          className="mt-8 inline-block bg-primary px-8 py-3.5 text-xs tracking-[0.2em] text-primary-foreground transition-colors hover:bg-primary/90"
-        >
-          CONTINUE SHOPPING
-        </Link>
+      <div className="flex flex-col items-center justify-center px-6 py-32 text-center min-h-[60vh]">
+        <div className="max-w-xl">
+          <h1 className="font-serif text-4xl text-foreground">Thank You</h1>
+          <p className="mt-6 leading-relaxed text-muted-foreground text-lg">
+            Your order has been placed. A receipt has been sent to our team via
+            WhatsApp — we will confirm your order shortly.
+          </p>
+          <Link
+            href="/products"
+            className="mt-10 inline-block bg-primary px-10 py-4 text-sm tracking-[0.2em] text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            CONTINUE SHOPPING
+          </Link>
+        </div>
       </div>
     )
   }
