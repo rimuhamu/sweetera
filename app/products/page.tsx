@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { ProductsGrid } from '@/components/products-grid'
 
 export const metadata: Metadata = {
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
 export default function ProductsPage() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-8 lg:px-12 lg:py-12">
-      <ProductsGrid />
+      <Suspense fallback={<div className="h-96 w-full animate-pulse bg-secondary/50" />}>
+        <ProductsGrid />
+      </Suspense>
     </section>
   )
 }
