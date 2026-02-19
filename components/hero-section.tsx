@@ -12,15 +12,13 @@ export function HeroSection() {
         priority
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-foreground/30" />
+      <div className="absolute inset-0 bg-foreground/45" />
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
-        <p className="mb-4 text-xs tracking-[0.3em] text-primary-foreground/80">
-          ARTISAN PATISSERIE AND BAKERY
-        </p>
-        <h1 className="font-serif text-4xl leading-tight text-primary-foreground md:text-6xl md:leading-tight text-balance">
+
+        <h1 className="font-serif text-4xl leading-tight text-primary-foreground drop-shadow-md md:text-6xl md:leading-tight text-balance">
           Handcrafted Sweetness, Artfully Created
         </h1>
-        <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-primary-foreground/80 md:text-base">
+        <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-primary-foreground/90 drop-shadow-sm md:text-base">
           Premium pastries, artisan breads, and exquisite cakes crafted with
           traditional French techniques and the finest ingredients.
         </p>
